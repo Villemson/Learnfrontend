@@ -25,6 +25,6 @@ module.exports = {
             filename: 'about.html',
             template: './src/index.html'
         }),
-        ...pages
+        ...pages //pages[0], pages[1], ... 
     ],
 };
