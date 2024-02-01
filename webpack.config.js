@@ -8,6 +8,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'main.js',
+        clean: true
     },
     devServer: {
         static: {
@@ -19,11 +20,16 @@ module.exports = {
     },
     module: {
         rules: [
-           {
+            {
                 test: /\.css$/,
                 // use: ['style-loader','css-loader']
-                use: [MiniCssExtractPlugin.loader,'css-loader']
-           }
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.s[ca]ss$/,
+                // use: ['style-loader','css-loader','sass-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader' ,'sass-loader']
+            }
         ]
     },
     plugins: [
