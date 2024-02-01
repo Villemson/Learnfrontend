@@ -1,11 +1,10 @@
 const path = require('path');
-const glob = require("glob");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const webpack = require('webpack');
+const { VueLoaderPlugin } = require('vue-loader')
+
 module.exports = {
-    //   mode: 'development',
+    mode: 'development',
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -29,13 +28,15 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                // use: ['style-loader','css-loader']
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /\.s[ca]ss$/,
-                // use: ['style-loader','css-loader','sass-loader']
-                use: [MiniCssExtractPlugin.loader, 'css-loader' ,'sass-loader']
+                use: ['style-loader', 'css-loader' ,'sass-loader']
+            },
+            {
+                test: /\.vue$/,
+                use: 'vue-loader'
             }
         ]
     },
@@ -43,14 +44,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new MiniCssExtractPlugin(),
-        new PurgeCSSPlugin({
-            paths: glob.sync('./src/**/*', { nodir: true }),
-        }),
         new webpack.DefinePlugin({
             __VUE_OPTIONS_API__: true,
             __VUE_PROD_DEVTOOLS__: false,
             __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
-        })
+        }),
+        new VueLoaderPlugin()
     ],
 };
