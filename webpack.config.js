@@ -2,9 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let pages = [];
-for(let i = 0; i<10;i++){
+for (let i = 0; i < 10; i++) {
     pages.push(new HtmlWebpackPlugin({
-        filename: i+'.html',
+        filename: i + '.html',
         template: './src/number.njk',
         templateParameters: {
             number: i
@@ -19,6 +19,14 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'main.js',
+    },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'public'),
+        },
+        compress: true,
+        port: 9000,
+        open: true
     },
     module: {
         rules: [
