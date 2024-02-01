@@ -1,4 +1,11 @@
-console.log("Hello2222");
 import './style.scss';
-/** is-danger */
-document.querySelector('button.button').classList.add('is-'+'danger')
+import { createApp, ref } from 'vue';
+
+const app = createApp({
+    setup(){
+        return {
+            count: ref(0)
+        }
+    }
+});
+app.mount('#app');
