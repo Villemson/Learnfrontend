@@ -6,6 +6,9 @@ import Home from './pages/Home.vue';
 import ToDo from './pages/ToDo.vue';
 import Chat from './pages/Chat.vue';
 import Chuck from './pages/Chuck.vue';
+import Polling from './pages/Polling.vue';
+import LongPolling from './pages/LongPolling.vue';
+import SSE from './pages/SSE.vue';
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -15,6 +18,9 @@ const routes = [
     { path: '/todo', component: ToDo, name: 'ToDo' },
     { path: '/chat', component: Chat, name: 'Chat' },
     { path: '/chuck', component: Chuck, name: 'Chuck Norris' },
+    { path: '/polling', component: Polling, name: 'Polling' },
+    { path: '/longpolling', component: LongPolling, name: 'Long Polling' },
+    { path: '/sse', component: SSE, name: 'SSE' },
 ];
   
 // 3. Create the router instance and pass the `routes` option
