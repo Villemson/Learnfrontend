@@ -4,6 +4,7 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 
 import Home from './pages/Home.vue';
 import ToDo from './pages/ToDo.vue';
+import Chat from './pages/Chat.vue';
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -11,6 +12,7 @@ import ToDo from './pages/ToDo.vue';
 const routes = [
     { path: '/', component: Home, name: 'Home' },
     { path: '/todo', component: ToDo, name: 'ToDo' },
+    { path: '/chat', component: Chat, name: 'Chat' },
 ];
   
 // 3. Create the router instance and pass the `routes` option
