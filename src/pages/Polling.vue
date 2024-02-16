@@ -10,6 +10,8 @@ setInterval(()=> {
             data.value.push(...response.data);
             lastInfoTime = Date.now();
         }
+    }).catch(() => {
+        
     });
 }, 1000);
 

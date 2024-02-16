@@ -1,6 +1,7 @@
 import './style.scss';
 import { createApp } from 'vue';
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
+import Buefy from '@ntohq/buefy-next';
 
 import Home from './pages/Home.vue';
 import ToDo from './pages/ToDo.vue';
@@ -22,7 +23,7 @@ const routes = [
     { path: '/longpolling', component: LongPolling, name: 'Long Polling' },
     { path: '/sse', component: SSE, name: 'SSE' },
 ];
-  
+
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
 // keep it simple for now.
@@ -31,7 +32,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes, // short for `routes: routes`
 });
-  
+
 
 
 import App from './App.vue';
@@ -39,4 +40,16 @@ const app = createApp(App);
 // Make sure to _use_ the router instance to make the
 // whole app router-aware.
 app.use(router);
+app.use(Buefy);
+
 app.mount('#app');
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('SW registered: ', registration);
+        }).catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+        });
+    });
+}

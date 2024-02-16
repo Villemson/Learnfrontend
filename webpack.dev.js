@@ -2,7 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const { VueLoaderPlugin } = require('vue-loader')
-
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const {InjectManifest} = require('workbox-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: './src/index.js',
@@ -18,7 +20,10 @@ module.exports = {
         compress: true,
         port: 9000,
         open: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        devMiddleware: {
+            writeToDisk: true,
+        },
     },
     resolve: {
         alias: {
@@ -50,6 +55,24 @@ module.exports = {
             __VUE_PROD_DEVTOOLS__: false,
             __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new WorkboxPlugin.GenerateSW({
+            // these options encourage the ServiceWorkers to get in there fast
+            // and not allow any straggling "old" SWs to hang around
+            clientsClaim: true,
+            skipWaiting: true,
+            maximumFileSizeToCacheInBytes: 10*1024*1024//10485760,
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+              { from: "public", to: "" },
+            ],
+        }),
+        // new InjectManifest({
+        //     swSrc: './src/service-worker.js',
+        //     swDest: 'service-worker.js',
+        //     // Any other config if needed.
+        //     maximumFileSizeToCacheInBytes: 10*1024*1024//10485760,
+        // }),
     ],
 };
