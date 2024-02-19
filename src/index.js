@@ -11,6 +11,7 @@ import Polling from './pages/Polling.vue';
 import LongPolling from './pages/LongPolling.vue';
 import SSE from './pages/SSE.vue';
 import WebStorage from './pages/WebStorage.vue';
+import Synthub from './pages/Synthub.vue';
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -24,6 +25,7 @@ const routes = [
     { path: '/longpolling', component: LongPolling, name: 'Long Polling' },
     { path: '/sse', component: SSE, name: 'SSE' },
     { path: '/WebStorage', component: WebStorage, name: 'WebStorage' },
+    { path: '/Synthub', component: Synthub, name: 'Synthub' },
 ];
 
 // 3. Create the router instance and pass the `routes` option
